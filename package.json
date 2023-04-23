@@ -1,0 +1,34 @@
+{
+  "name": "@zzkit/sev-pipe",
+  "version": "0.0.1",
+  "repository": "https://github.com/zhzLuke96/sev-pipe.git",
+  "author": "zhzluke96 <zhz961101@gmail.com>",
+  "license": "MIT",
+  "source": "./src/main.ts",
+  "main": "./dist/main.umd.js",
+  "module": "./dist/main.module.mjs",
+  "unpkg": "./dist/main.umd.js",
+  "types": "./dist/main.d.ts",
+  "exports": {
+    "types": "./dist/main.d.ts",
+    "require": "./dist/main.js",
+    "default": "./dist/main.modern.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.0",
+    "microbundle": "^0.15.1",
+    "ts-lib": "^0.0.5",
+    "typescript": "^5.0.4"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "scripts": {
+    "build": "microbundle --external none --define process.env.NODE_ENV=production,PKG_VERSION=$npm_package_version",
+    "watch": "microbundle watch --external none --define process.env.NODE_ENV=development,PKG_VERSION=$npm_package_version --compress false",
+    "dev": "rm -rf dist && yarn watch",
+    "start": "yarn build",
+    "prepack": "rm -rf dist && yarn run build"
+  }
+}
